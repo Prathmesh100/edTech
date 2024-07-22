@@ -1,8 +1,8 @@
 import { toast } from "react-hot-toast"
 
-import { setUser } from "../slices/profileSlice"
-import { apiConnector } from "./apiconnector"
-import { settingsEndpoints } from "./apis"
+import { setUser } from "../../slices/profileSlice"
+import { apiConnector } from "../apiconnector"
+import { settingsEndpoints } from "../apis"
 import { logout } from "./authAPI"
 
 const {
@@ -55,11 +55,11 @@ export function updateProfile(token, formData) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-      const userImage = response?.data?.userDetails?.image
-        ? response?.data?.userDetails?.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.userDetails?.firstName} ${response?.data?.userDetails?.lastName}`
+      const userImage = response.data.updatedUserDetails.image
+        ? response.data.updatedUserDetails.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`
       dispatch(
-        setUser({...response?.data?.userDetails, image: userImage, profile: response?.data?.profile })
+        setUser({ ...response.data.updatedUserDetails, image: userImage })
       )
       toast.success("Profile Updated Successfully")
     } catch (error) {

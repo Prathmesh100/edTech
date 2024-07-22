@@ -11,8 +11,8 @@ import RatingStars from "../components/common/RatingStars"
 import CourseAccordionBar from "../components/core/Course/CourseAccordionBar"
 import CourseDetailsCard from "../components/core/Course/CourseDetailsCard"
 import { formatDate } from "../services/formatDate"
-import { fetchCourseDetails } from "../services/courseDetailsAPI"
-import { buyCourse } from "../services/studentFeaturesAPI"
+import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
+import { buyCourse } from "../services/operations/studentFeaturesAPI"
 import GetAvgRating from "../utils/avgRating"
 import Error from "./Error"
 
@@ -33,7 +33,7 @@ function CourseDetails() {
   const [confirmationModal, setConfirmationModal] = useState(null)
   useEffect(() => {
     // Calling fetchCourseDetails fucntion to fetch the details
-  (async () => {
+    ;(async () => {
       try {
         const res = await fetchCourseDetails(courseId)
         // console.log("course details res: ", res)
