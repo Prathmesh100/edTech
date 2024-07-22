@@ -11,15 +11,15 @@ import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
 import {AiOutlineDown} from "react-icons/ai"
 
-const subLinks=[
-  {
-    name:'python',
+// const subLinks=[
+//   {
+//     name:'python',
     
-  },
-  {
-    name:'web dev',
-  }
-]
+//   },
+//   {
+//     name:'web dev',
+//   }
+// ]
 
 const Navbar = () => {
 
@@ -32,28 +32,28 @@ const Navbar = () => {
   const location=useLocation()
 
   // api call
-  // const [subLinks,setSubLinks] = useState([]);
+  const [subLinks,setSubLinks] = useState([]);
 
-  // const fetchSublinks= async() =>{
-  //   try{
-  //     // console.log("Fetching")
-  //      const result = await apiConnector(`GET`,categories.CATEGORIES_API);
-  //     //  console.log("result fetched")
-  //     //  console.log("printing sublinks: ", result)
-  //       setSubLinks(result.data.data)
+  const fetchSublinks= async() =>{
+    try{
+      // console.log("Fetching")
+       const result = await apiConnector(`GET`,categories.CATEGORIES_API);
+      //  console.log("result fetched")
+      //  console.log("printing sublinks: ", result)
+        setSubLinks(result.data.data)
  
-  //       const a= await fetch(`http://localhost:4000/api/v1/course/showAllCategories`)
-  //       // console.log("fetch data",a)
-  //   }
-  //   catch(error){
-  //     console.log("Could not fetch category list")
-  //   }
-  // }
-  // useEffect(()=>{
-  //     fetchSublinks();
-  //   },[])
+        const a= await fetch(`http://localhost:4000/api/v1/course/showAllCategories`)
+        console.log("fetch data",a)
+    }
+    catch(error){
+      console.log("Could not fetch category list")
+    }
+  }
+  useEffect(()=>{
+      fetchSublinks();
+    },[])
 
-
+  
   const matchRoute=(route) =>{
     return matchPath({path:route}, location.pathname)
     

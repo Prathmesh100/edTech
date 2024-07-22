@@ -52,7 +52,7 @@ export default function CourseInformationForm() {
       setValue("courseBenefits", course.whatYouWillLearn)
       setValue("courseCategory", course.category)
       setValue("courseRequirements", course.instructions)
-    //   setValue("courseImage", course.thumbnail)
+      setValue("courseImage", course.thumbnail)
     }
     getCategories()
 
@@ -70,7 +70,7 @@ export default function CourseInformationForm() {
       currentValues.courseBenefits !== course.whatYouWillLearn ||
       currentValues.courseCategory._id !== course.category._id ||
       currentValues.courseRequirements.toString() !==
-        course.instructions.toString()  ||
+        course.instructions.toString() ||
       currentValues.courseImage !== course.thumbnail
     ) {
       return true
@@ -122,7 +122,7 @@ export default function CourseInformationForm() {
         if (currentValues.courseImage !== course.thumbnail) {
           formData.append("thumbnailImage", data.courseImage)
         }
-        console.log("Edit Form data: ", formData)
+        // console.log("Edit Form data: ", formData)
         setLoading(true)
         const result = await editCourseDetails(formData, token)
         setLoading(false)
@@ -153,13 +153,12 @@ export default function CourseInformationForm() {
       dispatch(setCourse(result))
     }
     setLoading(false)
-    console.log("FORMDATA",formData)
   }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 text-black"
+      className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6"
     >
       {/* Course Title */}
       <div className="flex flex-col space-y-2">

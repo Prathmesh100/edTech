@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, useNavigate } from 'react-router-dom'
-import SIdebar from '../components/core/Dashboard/SIdebar'
+import SIdebar from '../components/core/Dashboard/Sidebar'
 import MyProfile from '../components/core/Dashboard/MyProfile'
 
 const Dashboard = () => {

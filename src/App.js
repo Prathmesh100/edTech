@@ -17,9 +17,15 @@ import EnrolledCourses from './components/core/Dashboard/EnrolledCourses'
 import Cart from './components/core/Dashboard/Cart'
 import { ACCOUNT_TYPE } from './utils/constants'
 import { useSelector } from 'react-redux'
-import AddCourse from './components/core/Dashboard/Add Course'
+import AddCourse from './components/core/Dashboard/AddCourse'
 import Contact from './Pages/Contact'
-
+import MyCourses from "./components/core/Dashboard/MyCourses";
+import EditCourse from "./components/core/Dashboard/EditCourse";
+import ViewCourse from './Pages/ViewCourse'
+import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
+import CourseDetails from './Pages/CourseDetails'
+import Catalog from './Pages/Catalog'
 function App() {
   const {user}=useSelector((state)=>state.profile)
   return (
@@ -34,6 +40,8 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail/>} />
         <Route path="/about" element={<AboutUs/>} /> 
         <Route path="/contact" element={<Contact/>} />
+        <Route path="courses/:courseId" element={<CourseDetails/>} />
+        <Route path="catalog/:catalogName" element={<Catalog/>} />
         <Route
           element={
             <PrivateRoute>
@@ -57,10 +65,31 @@ function App() {
           user?.accountType=== ACCOUNT_TYPE.INSTRUCTOR && (
             <>
             <Route path='/dashboard/add-course' element={<AddCourse/>} />
+            <Route path="dashboard/add-course" element={<AddCourse />} />
+          <Route path="dashboard/my-courses" element={<MyCourses/>} />
+          <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
             </>
           )
          } 
           </Route>
+          <Route element={
+        <PrivateRoute>
+          <ViewCourse />
+        </PrivateRoute>
+      }>
+
+      {
+        user?.accountType === ACCOUNT_TYPE.STUDENT && (
+          <>
+          <Route 
+            path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+            element={<VideoDetails />}
+          />
+          </>
+        )
+      }
+
+      </Route>
         <Route path='*' element={<Error/>}/>
 
 
